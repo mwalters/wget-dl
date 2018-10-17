@@ -13,6 +13,6 @@ Usage:
 ```
 docker run -d \
 --name wget-dl \
--v /Users/matthewwalters/tmp/dl:/downloads \
+-v /path/to/your/downloads:/downloads \
 mwalters/wget-dl:latest
 ```
