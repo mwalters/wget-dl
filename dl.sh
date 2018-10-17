@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env ash
 
 # Main purpose here is to read URLs from a file and run wget on each of them, thus
 # downloading them to the current directory.  You are own your own for how you want
@@ -8,14 +8,19 @@
 # Set up infinite loop
 while :
 do
+  # Create the urls.txt file if needed
+  if [ ! -f "/downloads/urls.txt" ]; then
+     touch /downloads/urls.txt
+  fi
+
   # Read first line from file containing URLs
-  line=$(head -n 1 ./urls.txt)
+  line=$(head -n 1 /downloads/urls.txt)
 
   # Only proceed if we got a non-empty line back
   if [ "$line" ]; then
 
     # Download URL
-    wget "$line"
+    wget -P /downloads "$line"
 
     # Capture return code from wget to test for success / failure
     RESULT=$?
@@ -26,7 +31,7 @@ do
       echo "Error received on: $line"
       echo "Status code: $RESULT"
       # Record failed URL to file to look at later
-      echo $line >> ./failed_urls.txt
+      echo $line >> /downloads/failed_urls.txt
       echo
     else
       # Success
@@ -38,9 +43,9 @@ do
     # Line 2 until the last line and writing it to a temporary file.  Then, use that
     # temporary file to overwrite the real URL list.  Finally, remove the temporary
     # file.  Basically, poor mans "remove first line from file"
-    tail -n +2 ./urls.txt > ./urls.txt.tmp
-    cat ./urls.txt.tmp > ./urls.txt
-    rm ./urls.txt.tmp
+    tail -n +2 /downloads/urls.txt > /downloads/urls.txt.tmp
+    cat /downloads/urls.txt.tmp > /downloads/urls.txt
+    rm /downloads/urls.txt.tmp
   else
     # An empty line was retrieved from the URLs file, so nothing to do
     echo 'Nothing to do'
