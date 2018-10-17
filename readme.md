@@ -14,5 +14,5 @@ Usage:
 docker run -d \
 --name wget-dl \
 -v /Users/matthewwalters/tmp/dl:/downloads \
-mwalters/wget-dl
+mwalters/wget-dl:latest
 ```
