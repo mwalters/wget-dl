@@ -32,7 +32,7 @@ In this instance `PUID=1001` and `PGID=1001`. To find yours use `id user` as bel
 
 ### Tagging / Releases
 
-* `latest` tag should be latest stable release
+* `stable` tag should be latest stable release
 * `development` tag may be unstable
 * Numbered tags can be used to pin to a specific release if desired
 
