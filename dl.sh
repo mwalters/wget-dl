@@ -1,7 +1,6 @@
 #!/usr/bin/env ash
 
-usermod -u $PUID downloader
-groupmod -g $PGID downloader
+source /environment.sh
 
 # Main purpose here is to read URLs from a file and run wget on each of them, thus
 # downloading them to the volume mounted in the container at `/volumes`.  You are own
