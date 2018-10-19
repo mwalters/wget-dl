@@ -1,4 +1,5 @@
 [View on github](https://github.com/mwalters/wget-dl)
+[View on dockerhub](https://hub.docker.com/r/mwalters/wget-dl/)
 
 This will download a series of files placed in a file called `urls.txt` (located in the volume mounted in the container).
 
@@ -14,5 +15,18 @@ Usage:
 docker run -d \
 --name wget-dl \
 -v /path/to/your/downloads:/downloads \
+-e PUID=<PUID>
+-e PGID=<GID>
 mwalters/wget-dl:latest
+```
+
+### User / Group Identifiers
+
+Sometimes when using data volumes (`-v` flags) permissions issues can arise between the host OS and the container. This is avoided by allowing you to specify the user `PUID` and group `PGID`. Below is an example of how to find out the user id and group ID for the user specified.
+
+In this instance `PUID=1001` and `PGID=1001`. To find yours use `id user` as below:
+
+```
+  $ id <dockeruser>
+    uid=1001(dockeruser) gid=1001(dockergroup) groups=1001(dockergroup)
 ```

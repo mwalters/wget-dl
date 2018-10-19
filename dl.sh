@@ -1,5 +1,8 @@
 #!/usr/bin/env ash
 
+usermod -u $PUID downloader
+groupmod -g $PGID downloader
+
 # Main purpose here is to read URLs from a file and run wget on each of them, thus
 # downloading them to the current directory.  You are own your own for how you want
 # to populate the URLs file.  Failed downloads are written to a
