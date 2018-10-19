@@ -1,16 +1,17 @@
-.PHONY: build run shell stop remove publish
+.PHONY: build run shell stop test
 
 build:
-	docker build -t mwalters/wget-dl:local .
+	@echo "Building image" && \
+	docker build --rm -t mwalters/wget-dl:local .
 
 run:
-	docker run --name wget-dl -d -v $(VERSION)/tmp/dl:/downloads mwalters/wget-dl -e PUID=0 -e PGID=12
+	docker run --rm --name wget-dl -d -e "PUID=1001" -e "PGID=1002" -v $(HOME)/tmp/dl:/downloads mwalters/wget-dl:local && docker logs -f wget-dl
 
 shell:
-	docker exec -ti wget-dl '/bin/ash'
+	@docker exec -ti wget-dl '/bin/ash'
 
 stop:
-	docker stop wget-dl
+	@echo "Stopping container" && \
+	docker stop wget-dl; true
 
-remove:
-	docker rm wget-dl
+test: stop build run
