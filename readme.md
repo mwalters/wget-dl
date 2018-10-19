@@ -1,5 +1,4 @@
-[View on github](https://github.com/mwalters/wget-dl)
-[View on dockerhub](https://hub.docker.com/r/mwalters/wget-dl/)
+### Purpose
 
 This will download a series of files placed in a file called `urls.txt` (located in the volume mounted in the container).
 
@@ -30,3 +29,14 @@ In this instance `PUID=1001` and `PGID=1001`. To find yours use `id user` as bel
   $ id <dockeruser>
     uid=1001(dockeruser) gid=1001(dockergroup) groups=1001(dockergroup)
 ```
+
+### Tagging / Releases
+
+* `latest` tag should be latest stable release
+* `development` tag may be unstable
+* Numbered tags can be used to pin to a specific release if desired
+
+### Links
+
+* [View on github](https://github.com/mwalters/wget-dl)
+* [View on dockerhub](https://hub.docker.com/r/mwalters/wget-dl/)
