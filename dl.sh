@@ -4,9 +4,9 @@ usermod -u $PUID downloader
 groupmod -g $PGID downloader
 
 # Main purpose here is to read URLs from a file and run wget on each of them, thus
-# downloading them to the current directory.  You are own your own for how you want
-# to populate the URLs file.  Failed downloads are written to a
-# file, "failed_urls.txt" which you can handle as you wish.
+# downloading them to the volume mounted in the container at `/volumes`.  You are own
+# your own for how you want to populate the URLs file.  Failed downloads are written to
+# a file, `failed_urls.txt`, which you can handle as you wish.
 
 # Set up infinite loop
 while :
@@ -46,8 +46,8 @@ do
     # Line 2 until the last line and writing it to a temporary file.  Then, use that
     # temporary file to overwrite the real URL list.  Finally, remove the temporary
     # file.  Basically, poor mans "remove first line from file"
-    tail -n +2 /downloads/urls.txt > /downloads/urls.txt.tmp
-    cat /downloads/urls.txt.tmp > /downloads/urls.txt
+    tail -n +2 /downloads/urls.txt > /downloads/urls.txt.tmp && \
+    cat /downloads/urls.txt.tmp > /downloads/urls.txt && \
     rm /downloads/urls.txt.tmp
   else
     # An empty line was retrieved from the URLs file, so nothing to do
