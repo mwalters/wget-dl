@@ -2,6 +2,10 @@
 
 source /environment.sh
 
+SLEEP_INTERVAL=${PAUSE:=30}
+
+echo "Will pause for $SLEEP_INTERVAL seconds between downloads"
+
 # Main purpose here is to read URLs from a file and run wget on each of them, thus
 # downloading them to the volume mounted in the container at `/volumes`.  You are own
 # your own for how you want to populate the URLs file.  Failed downloads are written to
@@ -56,6 +60,6 @@ do
   # Pause between downloads or download attempts by this many seconds.  Recommended
   # that this stay at 5 seconds or greater so you can easily break out of the loop
   # and to give the server a break if downloading multiple files from it.
-  sleep 30
+  sleep $SLEEP_INTERVAL
 
 done
