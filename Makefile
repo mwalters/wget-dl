@@ -5,7 +5,7 @@ build:
 	docker build --rm -t mwalters/wget-dl:local .
 
 run:
-	docker run --rm --name wget-dl -d -e "PUID=1001" -e "PGID=1002" -v $(HOME)/tmp/dl:/downloads mwalters/wget-dl:local && docker logs -f wget-dl
+	docker run --rm --name wget-dl -d -e "PUID=1001" -e "PGID=1002" -e "PAUSE=5" -v $(HOME)/tmp/dl:/downloads mwalters/wget-dl:local && docker logs -f wget-dl
 
 shell:
 	@docker exec -ti wget-dl '/bin/ash'
