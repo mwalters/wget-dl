@@ -8,55 +8,57 @@ There is a pause of 30 seconds, by default, between downloads.  This pause is co
 
 Any downloads that fail will be added to a file called `failed_urls.txt` in the downloads volume (it will be created if needed).
 
+---
 ### Usage
 
-```
+```shell
 docker run -d \
 --name wget-dl \
 -v /path/to/your/downloads:/downloads \
 -e PUID=<PUID> \
 -e PGID=<GID> \
 -e PAUSE=<PAUSE_INTERVAL> \
-mwalters/wget-dl:latest
+mwalters/wget-dl:stable
 ```
-
+---
 ### Parameters
 * `-v /path/to/your/downloads` - Path on the host where downloads and the text files mentioned above should be stored
 * `-e PUID` - For User ID; see explanation below
 * `-e PGID` - For Group ID; see explanation below
 * `-e PAUSE` - The number of seconds to pause between downloading files (Integer)
-
+---
 ### User / Group Identifiers
 
 Sometimes when using data volumes (`-v` flags) permissions issues can arise between the host OS and the container. This is avoided by allowing you to specify the user `PUID` and group `PGID`. Below is an example of how to find out the user id and group ID for the user specified.
 
 In this instance `PUID=1001` and `PGID=1001`. To find yours use `id <username>` as below:
 
-```
+```shell
   $ id <username>
     uid=1001(username) gid=1001(usergroupname) groups=1001(usergroupname)
 ```
-
+---
 ### Example urls.txt
-```
+```text
 https://www.somesite.com/download1.png
 https://www.anothersite.com/download2.png
 https://www.thirdsite.com/download3.png
 ```
-
+---
 ### Tagging / Releases
 
 * `stable` tag should be latest stable release
-* `development` tag may be unstable
+* `latest` is a mirror of `stable` (weird convention, amirite?  `stable` tag is preferred)
+* `development` tag may be unstable, but is the actual latest build
 * Numbered tags can be used to pin to a specific release if desired
-
+---
 ### Versioning
 [Semantic versioning](https://semver.org/) is used.  Basically, given a version of `x.y.z`
 
-* `x` = New features added with breaking changes
-* `y` = Adds functionality in a backwards-compatible manner
-* `z` = Small fixes that include non-breaking changes
-
+* `x` = New features added with breaking changes (i.e. you'll need to do something different to use this new version)
+* `y` = Adds functionality in a backwards-compatible manner (i.e. you shouldn't need to do anything different, but have new features available to you if you want to use them)
+* `z` = Small fixes that include non-breaking changes (i.e. something was fixed that should have worked but wasn't, nothing new)
+---
 ### Links
 
 * [View on github](https://github.com/mwalters/wget-dl)
