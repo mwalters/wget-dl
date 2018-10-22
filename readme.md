@@ -63,3 +63,4 @@ https://www.thirdsite.com/download3.png
 
 * [View on github](https://github.com/mwalters/wget-dl)
 * [View on dockerhub](https://hub.docker.com/r/mwalters/wget-dl/)
+* [Contibute](https://github.com/mwalters/wget-dl/wiki/contributing) to the development of this image
